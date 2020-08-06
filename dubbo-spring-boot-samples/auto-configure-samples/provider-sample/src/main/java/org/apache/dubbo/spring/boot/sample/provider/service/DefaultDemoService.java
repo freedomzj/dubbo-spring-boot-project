@@ -31,7 +31,7 @@ import java.util.Random;
  * @see DemoService
  * @since 2.7.0
  */
-@DubboService(version = "1.0.0")
+@DubboService(version = "1.0.0",group="test",timeout=3000)
 public class DefaultDemoService implements DemoService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());

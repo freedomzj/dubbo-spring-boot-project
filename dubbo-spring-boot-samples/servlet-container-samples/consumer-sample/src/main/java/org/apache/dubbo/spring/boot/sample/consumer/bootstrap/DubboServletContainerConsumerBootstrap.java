@@ -22,6 +22,7 @@ import org.apache.dubbo.spring.boot.sample.consumer.DemoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @EnableAutoConfiguration
+@SpringBootApplication
 @RestController
 public class DubboServletContainerConsumerBootstrap extends SpringBootServletInitializer {
 
-    @DubboReference(version = "${demo.service.version}", url = "${demo.service.url}")
+    @DubboReference(version = "${demo.service.version}", group="test",url = "${demo.service.url}")
     private DemoService demoService;
 
     @RequestMapping(value = "/say-hello", method = GET)
@@ -51,5 +53,6 @@ public class DubboServletContainerConsumerBootstrap extends SpringBootServletIni
         SpringApplication application = new SpringApplication(DubboServletContainerConsumerBootstrap.class);
         application.setWebApplicationType(WebApplicationType.SERVLET);
         application.run(args);
+        
     }
 }

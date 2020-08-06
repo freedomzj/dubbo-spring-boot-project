@@ -14,45 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.dubbo.spring.boot.sample.consumer.bootstrap;
-
-import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.Method;
-import org.apache.dubbo.spring.boot.sample.consumer.DemoService;
+package org.apache.dubbo.spring.boot.sample.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
  * Dubbo Auto Configuration Consumer Bootstrap
  *
  * @since 2.7.0
  */
+@SpringBootApplication
 @EnableAutoConfiguration
-public class DubboAutoConfigurationConsumerBootstrap {
+public class DubboAutoConfigurationConsumerBootstrap  extends SpringBootServletInitializer {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @DubboReference(
-            version = "1.0.0",
-            url = "dubbo://127.0.0.1:12345",
-            timeout = 100,
-            methods = {
-                    @Method(name = "sayHello", timeout = 300)
-            }
-    )
-    private DemoService demoService;
 
-    public static void main(String[] args) {
-        SpringApplication.run(DubboAutoConfigurationConsumerBootstrap.class).close();
+    
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(getClass());
     }
 
-    @Bean
-    public ApplicationRunner runner() {
-        return args -> logger.info(demoService.sayHello("mercyblitz"));
+    public static void main(String[] args) { // Run as the generic Spring Boot Web(Servlet) Application
+        SpringApplication application = new SpringApplication(DubboAutoConfigurationConsumerBootstrap.class);
+        application.setWebApplicationType(WebApplicationType.SERVLET);
+        application.run(args);
+        
     }
 }

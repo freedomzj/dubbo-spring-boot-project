@@ -1,3 +1,8 @@
 spring:
   application:
     name: dubbo-auto-configure-consumer-sample
+demo:
+  service:
+    version: 1.0.0
+    url: dubbo://127.0.0.1:12345
+    

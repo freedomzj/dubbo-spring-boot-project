@@ -17,7 +17,6 @@
 package org.apache.dubbo.spring.boot.sample.provider.bootstrap;
 
 import org.apache.dubbo.spring.boot.sample.provider.service.DefaultDemoService;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
