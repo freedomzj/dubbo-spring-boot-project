@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.paperpass.book.consumer.BookService;
@@ -27,14 +27,25 @@ public class BookController {
 //	                    @Method(name = "findAll", timeout = 300)
 //	            }
 //	    )
-	 @DubboReference(version = "${demo.service.version}", url = "${demo.service.url}")
+	 @DubboReference(version = "${book.service.version}", url = "${book.service.url}",group="duowan")
     private BookService bookService;
+	 
+	 @DubboReference(version = "${file.service.version}", url = "${file.service.url}",group="duowan-file")
+	    private  com.paperpass.book.consumer.IFileService IFileService;
 	
     @RequestMapping("bookList")
 	public List<String>  book(String name){
 		bookService.findAll(name);
 		return bookService.findAll(name);
 	}
+    
+    
+    @RequestMapping("bookUpload")
+    @ResponseBody
+   	public Map<String, Object>  bookUpload(String base64Str){
+    	Map<String, Object>  map=IFileService.base64StrUpload(base64Str);
+    	return map;
+   	}
     
 
     @RequestMapping("bookAdd")

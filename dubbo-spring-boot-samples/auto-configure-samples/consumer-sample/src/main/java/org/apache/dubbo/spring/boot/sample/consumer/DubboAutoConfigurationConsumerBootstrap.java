@@ -16,8 +16,6 @@
  */
 package org.apache.dubbo.spring.boot.sample.consumer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -34,16 +32,14 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @EnableAutoConfiguration
 public class DubboAutoConfigurationConsumerBootstrap  extends SpringBootServletInitializer {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
-    
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(getClass());
     }
 
-    public static void main(String[] args) { // Run as the generic Spring Boot Web(Servlet) Application
+    public static void main(String[] args) { 
         SpringApplication application = new SpringApplication(DubboAutoConfigurationConsumerBootstrap.class);
         application.setWebApplicationType(WebApplicationType.SERVLET);
         application.run(args);
