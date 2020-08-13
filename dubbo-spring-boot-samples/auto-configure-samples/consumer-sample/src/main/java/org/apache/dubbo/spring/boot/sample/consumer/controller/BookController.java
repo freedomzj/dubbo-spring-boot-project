@@ -28,10 +28,10 @@ public class BookController {
 //	                    @Method(name = "findAll", timeout = 300)
 //	            }
 //	    )
-	@DubboReference(version = "${book.service.version}", url = "${book.service.url}",group="duowan")
+	@DubboReference(version = "${book.service.version}",group="duowan")
     private BookService bookService;
 	 
-	@DubboReference(version = "${file.service.version}", url = "${file.service.url}",group="duowan-file")
+	@DubboReference(version = "${file.service.version}",group="duowan-file")
     private  IFileService IFileService;
 	
     @RequestMapping("bookList")

@@ -41,7 +41,7 @@ public class DubboAutoConfigurationConsumerBootstrap  extends SpringBootServletI
 
 	Logger log=LoggerFactory.getLogger(DubboAutoConfigurationConsumerBootstrap.class);
 
-	@DubboReference(version = "${book.service.version}", url = "${book.service.url}",group="duowan")
+	@DubboReference(version = "${book.service.version}",group="duowan")
     private BookService bookService;
 	
 	
