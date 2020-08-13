@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @see DemoService
  * @since 2.7.0
  */
-@DubboService(version = "${demo.service.version}")
+@DubboService(version = "${demo.service.version}",group="${demo.service.group}")
 public class DefaultDemoService implements DemoService {
 
     /**

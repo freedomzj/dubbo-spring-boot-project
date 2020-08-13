@@ -34,11 +34,11 @@ public class DubboRegistryZooKeeperConsumerBootstrap {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @DubboReference(version = "${demo.service.version}")
+    @DubboReference(version = "${demo.service.version}",group="${demo.service.group}")
     private DemoService demoService;
 
     public static void main(String[] args) {
-        SpringApplication.run(DubboRegistryZooKeeperConsumerBootstrap.class).close();
+        SpringApplication.run(DubboRegistryZooKeeperConsumerBootstrap.class);
     }
 
     @Bean

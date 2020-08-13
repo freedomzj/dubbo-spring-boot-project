@@ -12,5 +12,5 @@ embedded:
 
 dubbo:
   registry:
-    address: zookeeper://127.0.0.1:${embedded.zookeeper.port}/?registry-type=service
+    address: zookeeper://192.168.66.133:${embedded.zookeeper.port}/?registry-type=service
     file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache

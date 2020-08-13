@@ -16,12 +16,19 @@
  */
 package org.apache.dubbo.spring.boot.sample.consumer;
 
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+
+import com.paperpass.book.consumer.BookService;
 
 /**
  * Dubbo Auto Configuration Consumer Bootstrap
@@ -32,17 +39,27 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @EnableAutoConfiguration
 public class DubboAutoConfigurationConsumerBootstrap  extends SpringBootServletInitializer {
 
+	Logger log=LoggerFactory.getLogger(DubboAutoConfigurationConsumerBootstrap.class);
 
-
+	@DubboReference(version = "${book.service.version}", url = "${book.service.url}",group="duowan")
+    private BookService bookService;
+	
+	
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(getClass());
+    }
+    
+    @Bean
+    public ApplicationRunner runner() {
+        return args -> log.info(bookService.findAll("all").toString());
     }
 
     public static void main(String[] args) { 
         SpringApplication application = new SpringApplication(DubboAutoConfigurationConsumerBootstrap.class);
         application.setWebApplicationType(WebApplicationType.SERVLET);
         application.run(args);
+//        SpringApplication.run(DubboAutoConfigurationConsumerBootstrap.class);
         
     }
 }

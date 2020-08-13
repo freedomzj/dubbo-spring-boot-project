@@ -1,4 +1,4 @@
-package org.apache.dubbo.spring.boot.sample.consumer.controller;
+package org.apache.dubbo.spring.boot.sample.provider.consumer.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -18,16 +18,6 @@ import com.paperpass.book.consumer.IFileService;
 public class BookController {
 
 	
-//	 @DubboReference(
-//	            version = "1.0.0",
-//	            url = "dubbo ://127.0.0.1:12345",
-//	            timeout = 3000,
-//        		group="duowan",
-//	            methods = {
-//	                    @Method(name = "findByName", timeout = 300),
-//	                    @Method(name = "findAll", timeout = 300)
-//	            }
-//	    )
 	@DubboReference(version = "${book.service.version}", url = "${book.service.url}",group="duowan")
     private BookService bookService;
 	 

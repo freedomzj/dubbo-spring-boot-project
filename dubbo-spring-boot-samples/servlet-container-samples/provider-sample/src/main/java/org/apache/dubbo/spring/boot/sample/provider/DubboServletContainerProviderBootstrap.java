@@ -14,19 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.dubbo.spring.boot.sample.provider.bootstrap;
+package org.apache.dubbo.spring.boot.sample.provider;
 
-import org.apache.dubbo.spring.boot.sample.consumer.DemoService;
-import org.apache.dubbo.spring.boot.sample.provider.service.DefaultDemoService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,15 +32,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @EnableAutoConfiguration
 @RestController
+//@ComponentScan(basePackages="org.apache.dubbo.spring.boot.sample.consumer.controller")
+@SpringBootApplication
 public class DubboServletContainerProviderBootstrap extends SpringBootServletInitializer {
 
-    @Autowired
-    private DemoService demoService;
-
-    @RequestMapping("/say/{name}")
-    public String say(@PathVariable String name) {
-        return demoService.sayHello(name);
-    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

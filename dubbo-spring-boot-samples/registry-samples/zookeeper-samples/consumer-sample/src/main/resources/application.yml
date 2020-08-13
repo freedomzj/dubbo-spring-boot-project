@@ -4,7 +4,10 @@ spring:
 
 demo:
   service:
-    version: 1.0.0
+    version: 2.0.0
+    group: zookeeperGroup
+
+    
 
 embedded:
   zookeeper:
@@ -12,5 +15,5 @@ embedded:
 
 dubbo:
   registry:
-    address: zookeeper://127.0.0.1:${embedded.zookeeper.port}
+    address: zookeeper://192.168.66.133:${embedded.zookeeper.port}
     file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache

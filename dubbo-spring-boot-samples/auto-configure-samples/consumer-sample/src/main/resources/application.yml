@@ -1,6 +1,16 @@
 spring:
   application:
     name: dubbo-auto-configure-consumer-sample
+
+embedded:
+  zookeeper:
+    port: 2181
+
+dubbo:
+  registry:
+    address: zookeeper://192.168.66.133:${embedded.zookeeper.port}
+    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+    
 book:
   service:
     version: 1.0.0
