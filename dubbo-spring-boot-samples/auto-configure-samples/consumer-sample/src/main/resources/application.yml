@@ -1,6 +1,6 @@
 spring:
   application:
-    name: dubbo-auto-configure-consumer-sample
+    name: duowan-consumer
 
 embedded:
   zookeeper:

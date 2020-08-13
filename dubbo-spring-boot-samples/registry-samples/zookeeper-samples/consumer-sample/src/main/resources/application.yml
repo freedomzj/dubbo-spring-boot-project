@@ -1,6 +1,6 @@
 spring:
   application:
-    name: dubbo-registry-zookeeper-consumer-sample
+    name: zookeeper-consumer
 
 demo:
   service:

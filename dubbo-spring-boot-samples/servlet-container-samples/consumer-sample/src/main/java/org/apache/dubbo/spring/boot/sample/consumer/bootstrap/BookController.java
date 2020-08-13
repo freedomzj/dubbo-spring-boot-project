@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,7 @@ import com.paperpass.book.consumer.BookService;
 public class BookController {
 
 	
-	 @DubboReference(version = "${book.service.version}",group="duowan", url = "${book.service.url}")
+	 @DubboReference(version = "${book.service.version}",group="duowan")
     private BookService bookService;
 	
     @RequestMapping("bookList")

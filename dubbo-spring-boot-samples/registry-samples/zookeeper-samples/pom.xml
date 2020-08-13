@@ -31,7 +31,6 @@
     <modules>
         <module>consumer-sample</module>
         <module>provider-sample</module>
-    <module>bookStore</module>
   </modules>
 
 </project>

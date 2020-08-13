@@ -14,7 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.dubbo.spring.boot.sample.provider;
+package org.apache.dubbo.spring.boot.sample.consumer.bootstrap;
+
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.spring.boot.sample.consumer.DemoService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -22,20 +25,24 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Dubbo Servlet Container Provider Bootstrap
- *
- * @see DefaultDemoService
- * @since 2.7.7
- */
-@EnableAutoConfiguration
-@RestController
-//@ComponentScan(basePackages="org.apache.dubbo.spring.boot.sample.consumer.controller")
-@SpringBootApplication
-public class DubboServletContainerProviderBootstrap extends SpringBootServletInitializer {
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+@EnableAutoConfiguration
+@SpringBootApplication
+@RestController
+public class BookStoreWebConsumerApp extends SpringBootServletInitializer {
+
+    @DubboReference(version = "${demo.service.version}", group="test")
+    private DemoService demoService;
+
+    @RequestMapping(value = "/say-hello", method = GET)
+    public String sayHello(@RequestParam String name) {
+        return demoService.sayHello(name);
+    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -43,8 +50,9 @@ public class DubboServletContainerProviderBootstrap extends SpringBootServletIni
     }
 
     public static void main(String[] args) { // Run as the generic Spring Boot Web(Servlet) Application
-        SpringApplication application = new SpringApplication(DubboServletContainerProviderBootstrap.class);
+        SpringApplication application = new SpringApplication(BookStoreWebConsumerApp.class);
         application.setWebApplicationType(WebApplicationType.SERVLET);
         application.run(args);
+        
     }
 }

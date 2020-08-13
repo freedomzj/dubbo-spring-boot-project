@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.apache.dubbo.samples</groupId>
-    <artifactId>dubbo-spring-boot-registry-zookeeper-samples</artifactId>
+    <artifactId>bookstore-web</artifactId>
     <version>${revision}</version>
   </parent>
   <groupId>com.duowan.store</groupId>
